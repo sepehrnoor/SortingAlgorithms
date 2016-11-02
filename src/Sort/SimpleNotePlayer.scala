@@ -4,6 +4,7 @@ import javax.sound.midi._
 
 /**
   * Plays notes. Takes integers as notes for a specific time. 0 represents C
+  * Note: This file was created by the personnel at Lund University
   */
 object SimpleNotePlayer {
   val channel: Option[Array[MidiChannel]] = try {

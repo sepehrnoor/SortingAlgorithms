@@ -16,23 +16,23 @@ object QuickSort {
     t.run()
     b = ArrayBuffer()
     println(testArray.mkString(" "))
-    qsort(testArray)
+    quickSort(testArray)
     println("Done!")
     w.draw()
     println(testArray.mkString(" "))
   }
 
-  def qsort(a: Array[Int], lo: Int, hi: Int): Unit = {
+  def quickSort(a: Array[Int], lo: Int, hi: Int): Unit = {
     if (lo < hi) {
       //do nothing if the list a single element
       val p = partition(a, lo, hi) //move elements into two lists, one larger than p and one smaller, ignore p in middle and store it for later use
-      qsort(a, lo, p) //sort the left part of the list (smaller than p)
-      qsort(a, p + 1, hi) //sort the right part of the list (larger than p)
+      quickSort(a, lo, p) //sort the left part of the list (smaller than p)
+      quickSort(a, p + 1, hi) //sort the right part of the list (larger than p)
     }
   }
 
-  def qsort(a: Array[Int]): Unit = {
-    qsort(a, 0, a.length - 1)
+  def quickSort(a: Array[Int]): Unit = {
+    quickSort(a, 0, a.length - 1)
   }
 
   def partition(a: Array[Int], lo: Int, hi: Int): Int = {
@@ -66,7 +66,7 @@ object QuickSort {
     w.drawBars(Color.red, i1, i2)
     playNote(w,a(i1))
     playNote(w,a(i2))
-    Thread.sleep(10)
+    Thread.sleep(2)
     SimpleNotePlayer.stop()
   }
 

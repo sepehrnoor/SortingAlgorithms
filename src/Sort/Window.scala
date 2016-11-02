@@ -3,8 +3,6 @@ package Sort
 import java.awt.{Color, Graphics}
 import javax.swing._
 
-import scala.collection.mutable.ArrayBuffer
-
 class Window(a: Array[Int]) extends JFrame() with Runnable {
   val defaultWidth = 800
   val defaultHeight = 800

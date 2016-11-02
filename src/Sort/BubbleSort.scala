@@ -1,27 +1,28 @@
 package Sort
+
 import java.awt.Color
 
-object SelectionSort {
+object BubbleSort {
   var w: Window = _
   var t: Thread = _
 
   def main(args: Array[String]): Unit = {
-    val testArray = util.Random.shuffle(0 to 199).toArray
+    val testArray = util.Random.shuffle(0 to 99).toArray
     w = new Window(testArray)
     t = new Thread(w)
     t.run()
     println(testArray.mkString(" "))
-    selectionsort(testArray)
+    bubbleSort(testArray)
     println("Done!")
     w.draw()
     println(testArray.mkString(" "))
   }
 
-  def selectionsort(a: Array[Int]): Unit = {
+  def bubbleSort(a: Array[Int]): Unit = {
     for (j <- a.length - 1 to 0 by -1) {
-      for (i <- 0 to j) {
-        if (a(j) < (a(i))) {
-          swap(a, j, i)
+      for (i <- 0 until j) {
+        if (a(i) > a(i + 1)) {
+          swap(a, i, i + 1)
         }
       }
     }

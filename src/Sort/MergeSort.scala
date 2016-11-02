@@ -15,21 +15,21 @@ object MergeSort {
     t = new Thread(w)
     t.run()
     println(testArray.mkString(" "))
-    val sortedArray = mergesort(testArray, 0)
+    val sortedArray = mergeSort(testArray, 0)
     println("Done!")
     w.draw()
     println(sortedArray.mkString(" "))
   }
 
-  def mergesort(a: Array[Int], pos: Int): Array[Int] = {
+  def mergeSort(a: Array[Int], pos: Int): Array[Int] = {
     if (a.length <= 1) {
       return a
     }
 
-    val mid = a.size / 2
+    val mid = a.length / 2
 
-    val left = mergesort(a.slice(0, mid), pos)
-    val right = mergesort(a.slice(mid, a.size), pos + mid)
+    val left = mergeSort(a.slice(0, mid), pos)
+    val right = mergeSort(a.slice(mid, a.length), pos + mid)
     val r = merge(left, right)
     updateWindow(r, pos)
     return r
@@ -60,7 +60,7 @@ object MergeSort {
       right = right.tail
     }
 
-    return result.toArray
+    result.toArray
   }
 
   def swap(a: Array[Int], i1: Int, i2: Int): Unit = {
@@ -69,7 +69,6 @@ object MergeSort {
     a(i2) = temp
     w.draw()
     w.drawBars(Color.pink, i1, i2)
-    Thread.sleep(2)
   }
 
   def updateWindow(a: Array[Int], start: Int): Unit = {
@@ -83,6 +82,6 @@ object MergeSort {
   def replaceAndUpdate(index: Int, value: Int): Unit = {
     testArray(index) = value
     w.drawBars(Color.white, index)
-    Thread.sleep(10)
+    Thread.sleep(2)
   }
 }
