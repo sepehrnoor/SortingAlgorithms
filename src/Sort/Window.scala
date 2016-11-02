@@ -3,7 +3,7 @@ package Sort
 import java.awt.{Color, Graphics}
 import javax.swing._
 
-class Window(array: Array[Int]) extends JFrame() with Runnable {
+class Window(array: Array[Int], name: String) extends JFrame(name) with Runnable {
   val arr = array
   val defaultWidth = 800
   val defaultHeight = 800
@@ -66,5 +66,10 @@ class Window(array: Array[Int]) extends JFrame() with Runnable {
   def updateColors(): Unit = {
     drawBars(Color.white, coloredBuffer: _*)
     coloredBuffer = Array()
+  }
+
+  def destroy(): Unit ={
+    running = false
+    setVisible(false)
   }
 }

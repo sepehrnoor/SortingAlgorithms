@@ -7,28 +7,29 @@ import scala.collection.mutable.ArrayBuffer
 object Main {
 
   def main(args: Array[String]): Unit = {
-    //testInplaceSort(800, Algorithms.quickSort)
-    //testInplaceSort(100,Algorithms.bubbleSort)
-    //testInplaceSort(100,Algorithms.selectionSort)
-    testOOPSort(800, Algorithms.mergeSort)
+    testInPlaceSort(800, Algorithms.quickSort, "Quick sort")
+    testInPlaceSort(100, Algorithms.bubbleSort, "Bubble sort")
+    testInPlaceSort(100, Algorithms.selectionSort, "Selection sort")
+    testOOPSort(800, Algorithms.mergeSort, "Merge sort")
   }
 
-  def testInplaceSort(sampleSize: Int, fun: (Array[Int], Window) => Unit): Unit = {
+  def testInPlaceSort(sampleSize: Int, fun: (Array[Int], Window) => Unit, name: String): Unit = {
     val testArray = util.Random.shuffle(0 to sampleSize - 1).toArray
-    val w = new Window(testArray)
-    val t = new Thread(w)
-    t.run()
+    val w = new Window(testArray, name + s", sample size $sampleSize")
+    val t = new Thread(w, name)
+    t.start()
     println(testArray.mkString(" "))
     fun(testArray, w)
     println("Done!")
     w.draw()
     println(testArray.mkString(" "))
+
   }
 
-  def testOOPSort(sampleSize: Int, fun: (Array[Int], Array[Int], Window) => Array[Int]): Unit = {
+  def testOOPSort(sampleSize: Int, fun: (Array[Int], Array[Int], Window) => Array[Int], name: String): Unit = {
     val testArray = util.Random.shuffle(0 to sampleSize - 1).toArray
-    val w = new Window(testArray)
-    val t = new Thread(w)
+    val w = new Window(testArray, name + s", sample size $sampleSize")
+    val t = new Thread(w, name)
     t.run()
     println(testArray.mkString(" "))
     val sorted = fun(testArray, testArray, w)
@@ -172,7 +173,9 @@ object Algorithms {
   def replaceAndUpdate(index: Int, value: Int, targetArray: Array[Int], targetWindow: Window, delay: Int): Unit = {
     targetArray(index) = value
     targetWindow.drawBars(Color.white, index)
+    playNote(targetWindow, value)
     Thread.sleep(delay)
+    SimpleNotePlayer.stop()
   }
 
   def playNote(w: Window, v: Int): Unit = {
