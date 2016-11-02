@@ -3,18 +3,19 @@ package Sort
 import java.awt.{Color, Graphics}
 import javax.swing._
 
-class Window(a: Array[Int]) extends JFrame() with Runnable {
+class Window(array: Array[Int]) extends JFrame() with Runnable {
+  val arr = array
   val defaultWidth = 800
   val defaultHeight = 800
   var barSize = 1
-  val barMax = a.max
+  val barMax = array.max
   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-  if (a.length > defaultWidth) {
-    setSize(a.length, defaultHeight)
+  if (array.length > defaultWidth) {
+    setSize(array.length, defaultHeight)
     barSize = 1
   }
-  barSize = defaultWidth / a.length
-  val newWidth = barSize * a.length
+  barSize = defaultWidth / array.length
+  val newWidth = barSize * array.length
   setSize(newWidth, defaultHeight)
   setVisible(true)
   createBufferStrategy(3)
@@ -28,7 +29,7 @@ class Window(a: Array[Int]) extends JFrame() with Runnable {
     draw()
   }
 
-  def draw(): Unit = drawBars(Color.white, a: _*)
+  def draw(): Unit = drawBars(Color.white, array: _*)
 
   def drawBars(color: Color, bars: Int*): Unit = {
     do {
@@ -38,7 +39,7 @@ class Window(a: Array[Int]) extends JFrame() with Runnable {
         //draw the bars
         for (i <- bars) {
           val x = i * barSize //x-coordinate
-          val h = (a(i).toDouble / barMax * defaultHeight).toInt //height of bar
+          val h = (array(i).toDouble / barMax * defaultHeight).toInt //height of bar
           val y = defaultHeight - h //y-coordinate
           val w = barSize //width of bar
           graphics.setColor(Color.black)
